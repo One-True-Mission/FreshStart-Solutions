@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FreshStart Solutions – Professional Cleaning Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:     #4a7c59;
+      --sage-lt:  #6ba07a;
+      --sage-dk:  #2e5c3c;
+      --cream:    #f5f0e8;
+      --warm-wh:  #faf8f4;
+      --charcoal: #1e2421;
+      --mid:      #4a5240;
+      --light:    #8a9480;
+      --border:   #d8d2c4;
+      --gold:     #c8a96e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-wh);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(155deg, var(--sage-dk) 0%, var(--sage) 45%, #3a6b4a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 3rem 2rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(200,169,110,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 45%);
+    }
+
+    .hero-badge {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,169,110,0.5);
+      padding: 0.45rem 1.2rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+
+    .hero h1 span { color: var(--gold); font-style: italic; }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      max-width: 480px;
+      line-height: 1.7;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: inline-block;
+      background: var(--gold);
+      color: var(--charcoal);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+    .hero-cta:hover { background: #d4b87e; transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.45);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: fadeUp 1s ease 0.5s both;
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollLine 2s ease infinite;
+    }
+
+    /* ── DIVIDER ── */
+    .leaf-divider {
+      text-align: center;
+      padding: 3rem 0 1rem;
+      color: var(--sage);
+      font-size: 1.4rem;
+      opacity: 0.5;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-body {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 560px;
+    }
+
+    /* ── SERVICES CARDS ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 2.2rem 2rem;
+      position: relative;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .service-card:hover { box-shadow: 0 12px 40px rgba(74,124,89,0.12); transform: translateY(-4px); }
+    .service-card.featured { border-color: var(--sage); }
+    .service-card.featured::after {
+      content: 'Most Popular';
+      position: absolute;
+      top: -0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--sage);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+    }
+
+    .card-size {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 0.25rem;
+    }
+
+    .card-sqft {
+      font-size: 0.82rem;
+      color: var(--light);
+      margin-bottom: 1.4rem;
+    }
+
+    .card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--sage-dk);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .card-price sup { font-size: 1.3rem; vertical-align: super; }
+
+    .card-features { list-style: none; }
+    .card-features li {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--mid);
+      padding: 0.38rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .card-features li:last-child { border-bottom: none; }
+    .card-features li::before { content: '✓'; color: var(--sage); font-size: 0.8rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── ADD-ONS ── */
+    .addons-section { background: var(--cream); }
+    .addons-inner { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .addon-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .addon-card:hover { border-color: var(--sage); box-shadow: 0 6px 24px rgba(74,124,89,0.1); }
+
+    .addon-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .addon-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.35rem; }
+    .addon-desc { font-size: 0.8rem; font-weight: 300; color: var(--light); line-height: 1.5; }
+
+    /* ── FORM ── */
+    .form-section { background: var(--charcoal); }
+    .form-inner { max-width: 780px; margin: 0 auto; padding: 6rem 2rem; }
+
+    .form-inner .section-label { color: var(--gold); }
+    .form-inner .section-title { color: #fff; }
+    .form-inner .section-body { color: rgba(255,255,255,0.55); }
+
+    .request-form { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+    .field { display: flex; flex-direction: column; gap: 0.45rem; }
+
+    label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    input, select, textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 0.65rem;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      padding: 0.9rem 1.1rem;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s;
+      width: 100%;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.25); }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--sage-lt);
+      background: rgba(255,255,255,0.09);
+    }
+
+    select option { background: var(--charcoal); color: #fff; }
+
+    textarea { resize: vertical; min-height: 110px; }
+
+    .addons-check-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.3rem;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0.6rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .check-item:hover { border-color: var(--sage-lt); background: rgba(255,255,255,0.08); }
+    .check-item input[type="checkbox"] {
+      width: 1rem; height: 1rem;
+      accent-color: var(--sage-lt);
+      flex-shrink: 0;
+      padding: 0;
+    }
+    .check-item span { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.75); }
+
+    .field-note { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-top: 0.2rem; }
+
+    .submit-btn {
+      margin-top: 0.5rem;
+      background: var(--gold);
+      color: var(--charcoal);
+      border: none;
+      border-radius: 3rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1.1rem 3rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .submit-btn:hover { background: #d4b87e; transform: translateY(-2px); }
+
+    /* ── SUCCESS ── */
+    .success-msg {
+      display: none;
+      background: rgba(74,124,89,0.2);
+      border: 1px solid var(--sage-lt);
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      color: #a8d8b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111712;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    footer strong { color: rgba(255,255,255,0.45); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollLine {
+      0%,100% { opacity: 0.4; }
+      50%      { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-badge">Professional Cleaning Services</div>
+  <h1>FreshStart<br/><span>Solutions</span></h1>
+  <p class="hero-sub">Premium residential cleaning tailored to your home — delivered with care, precision, and guaranteed satisfaction.</p>
+  <a href="#book" class="hero-cta">Request a Service</a>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ══ PACKAGES ══ -->
+<div class="section">
+  <div class="section-label">Our Packages</div>
+  <h2 class="section-title">The Right Clean<br/>For Every Home</h2>
+  <p class="section-body">Every package includes our comprehensive standard clean. No hidden fees — just a spotless home.</p>
+
+  <div class="services-grid">
+
+    <!-- Small -->
+    <div class="service-card">
+      <div class="card-size">Small</div>
+      <div class="card-title">Cozy Home</div>
+      <div class="card-sqft">800 – 1,200 sq ft</div>
+      <div class="card-price"><sup>$</sup>200</div>
+      <ul class="card-features">
+        <li>Sweep & mop all floors</li>
+        <li>Vacuum carpets & rugs</li>
+        <li>Sanitize kitchen & surfaces</li>
+        <li>Clean showers & toilets</li>
+        <li>Wipe ceiling fans & fixtures</li>
+        <li>Dust baseboards & trim</li>
+      </ul>
+    </div>
+
+    <!-- Medium -->
+    <div class="service-card featured">
+      <div class="card-size">Medium</div>
+      <div class="card-title">Family Home</div>
+      <div class="card-sqft">1,200 – 2,000 sq ft</div>
+      <div class="card-price"><sup>$</sup>300</div>
+      <ul class="card-features">
+        <li>Sweep & mop all floors</li>
+        <li>Vacuum carpets & rugs</li>
+        <li>Sanitize kitchen & surfaces</li>
+        <li>Clean showers & toilets</li>
+        <li>Wipe ceiling fans & fixtures</li>
+        <li>Dust baseboards & trim</li>
+        <li>Interior window wipe-down</li>
+      </ul>
+    </div>
+
+    <!-- Large -->
+    <div class="service-card">
+      <div class="card-size">Large</div>
+      <div class="card-title">Spacious Estate</div>
+      <div class="card-sqft">2,000+ sq ft</div>
+      <div class="card-price"><sup>$</sup>400</div>
+      <ul class="card-features">
+        <li>Sweep & mop all floors</li>
+        <li>Vacuum carpets & rugs</li>
+        <li>Sanitize kitchen & surfaces</li>
+        <li>Clean showers & toilets</li>
+        <li>Wipe ceiling fans & fixtures</li>
+        <li>Dust baseboards & trim</li>
+        <li>Interior window wipe-down</li>
+        <li>Appliance exterior cleaning</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ADD-ONS ══ -->
+<section class="addons-section">
+  <div class="addons-inner">
+    <div class="section-label">Add-On Services</div>
+    <h2 class="section-title">Customize Your Clean</h2>
+    <p class="section-body">Enhance your package with any of our specialized add-on services, tailored to your specific needs.</p>
+
+    <div class="addons-grid">
+      <div class="addon-card">
+        <div class="addon-icon">🗑️</div>
+        <div class="addon-name">Waste Removal</div>
+        <div class="addon-desc">Haul away unwanted junk, debris, and bulk items</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🧶</div>
+        <div class="addon-name">Carpet Cleaning</div>
+        <div class="addon-desc">Deep steam or dry clean for fresh, renewed carpets</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🌿</div>
+        <div class="addon-name">Odor Control</div>
+        <div class="addon-desc">Neutralize pet, smoke, and stubborn household odors</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🪟</div>
+        <div class="addon-name">Window Washing</div>
+        <div class="addon-desc">Interior & exterior streak-free glass cleaning</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🛋️</div>
+        <div class="addon-name">Upholstery Clean</div>
+        <div class="addon-desc">Sofas, chairs, and fabric surfaces deep cleaned</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🧺</div>
+        <div class="addon-name">Laundry Service</div>
+        <div class="addon-desc">Wash, dry, and fold up to two loads of laundry</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🍽️</div>
+        <div class="addon-name">Appliance Deep Clean</div>
+        <div class="addon-desc">Oven, fridge, microwave interior scrub-down</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🏗️</div>
+        <div class="addon-name">Post-Construction</div>
+        <div class="addon-desc">Dust, debris, and residue removal after renovations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOOKING FORM ══ -->
+<section class="form-section" id="book">
+  <div class="form-inner">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Request Your<br/>Service Today</h2>
+    <p class="section-body">Fill out the form below and our team will reach out within 24 hours to confirm your appointment.</p>
+
+    <form class="request-form" id="requestForm" onsubmit="handleSubmit(event)">
+
+      <div class="form-row">
+        <div class="field">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" placeholder="Jane" required/>
+        </div>
+        <div class="field">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" placeholder="Smith" required/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@email.com" required/>
+        </div>
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000"/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="address">Service Address</label>
+        <input type="text" id="address" name="address" placeholder="123 Main St, City, TX 00000" required/>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="package">Home Size / Package</label>
+          <select id="package" name="package" required>
+            <option value="" disabled selected>Select a package</option>
+            <option value="small">Small – 800–1,200 sq ft ($200)</option>
+            <option value="medium">Medium – 1,200–2,000 sq ft ($300)</option>
+            <option value="large">Large – 2,000+ sq ft ($400)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="date">Preferred Date</label>
+          <input type="date" id="date" name="date" required/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Add-On Services (Optional)</label>
+        <div class="addons-check-grid">
+          <label class="check-item">
+            <input type="checkbox" name="addons" value="waste_removal"/>
+            <span>🗑️ Waste Removal</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="addons" value="carpet_cleaning"/>
+            <span>🧶 Carpet Cleaning</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="addons" value="odor_control"/>
+            <span>🌿 Odor Control</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="addons" value="window_washing"/>
+            <span>🪟 Window Washing</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="addons" value="upholstery"/>
+            <span>🛋️ Upholstery Clean</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="addons" value="laundry"/>
+            <span>🧺 Laundry Service</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="addons" value="appliance_clean"/>
+            <span>🍽️ Appliance Deep Clean</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="addons" value="post_construction"/>
+            <span>🏗️ Post-Construction</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="notes">Special Notes or Instructions</label>
+        <textarea id="notes" name="notes" placeholder="Pets in the home, areas to focus on, gate codes, etc."></textarea>
+      </div>
+
+      <p class="field-note">* We'll contact you to confirm your appointment and provide a final quote including any add-ons.</p>
+
+      <button type="submit" class="submit-btn">Submit Request →</button>
+
+      <div class="success-msg" id="successMsg">
+        ✅ &nbsp;<strong>Thank you!</strong> We've received your request and will be in touch within 24 hours to confirm your appointment.
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p><strong>FreshStart Solutions</strong> &nbsp;·&nbsp; Professional Cleaning Services</p>
+  <p style="margin-top:0.5rem;">© 2025 FreshStart Solutions. All rights reserved.</p>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('requestForm');
+    const msg  = document.getElementById('successMsg');
+    form.querySelectorAll('input,select,textarea,button').forEach(el => el.disabled = true);
+    msg.style.display = 'block';
+    msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Set min date to today
+  const dateInput = document.getElementById('date');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+</script>
+
+</body>
+</html>
